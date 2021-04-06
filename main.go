@@ -16,6 +16,9 @@ identifying the service instance.
 var id = 0
 var count = 0
 
+/*
+Handler to remind user to use the other handler (duplicate calls).
+ */
 func handlerRedirect(w http.ResponseWriter, r *http.Request) {
 
 	response := "<html><head><title>Simple Service</title></head>" +
@@ -24,6 +27,9 @@ func handlerRedirect(w http.ResponseWriter, r *http.Request) {
 
 }
 
+/*
+Returns a static identifier, as well as a incrementing count.
+ */
 func handlerDefault(w http.ResponseWriter, r *http.Request) {
 
 	response := "<html><head><title>Simple Service</title></head>" +
@@ -35,7 +41,10 @@ func handlerDefault(w http.ResponseWriter, r *http.Request) {
 	count++
 
 }
+
+// Establish compatibility with PaaS platforms
 const ENV_VAR_PORT = "PORT"
+// Default port
 const DEFAULT_PORT = "8080"
 
 func main() {
@@ -46,7 +55,7 @@ func main() {
 		port = DEFAULT_PORT
 	}
 
-	http.HandleFunc("/", handlerDefault)
+	http.HandleFunc("/", handlerRedirect)
 	http.HandleFunc("/count", handlerDefault)
 	log.Println("Launching service on port " + port)
 	log.Fatal(http.ListenAndServe(":" + port, nil))

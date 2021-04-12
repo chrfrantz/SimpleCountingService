@@ -13,7 +13,9 @@ The purpose of this service to simply increment a counter and display it to the 
 identifying the service instance.
  */
 
-var id = 0
+// ID of the service - identifying the instance
+const ID = 0
+// Counter to be modified at runtime
 var count = 0
 
 /*
@@ -39,7 +41,7 @@ func handlerIncrement(w http.ResponseWriter, r *http.Request) {
 
 	// Prepare HTML response
 	response := "<html><head><title>Simple Counting Service</title></head>" +
-		"<body><h1>Call to service " + strconv.Itoa(id) +
+		"<body><h1>Call to service " + strconv.Itoa(ID) +
 		"; total calls: " + strconv.Itoa(count) + "</h1></body></html>"
 
 	// Return response
@@ -56,7 +58,7 @@ func handlerReset(w http.ResponseWriter, r *http.Request) {
 
 	// Prepare HTML response
 	response := "<html><head><title>Simple Counting Service</title></head>" +
-		"<body><h1>Call to service " + strconv.Itoa(id) +
+		"<body><h1>Call to service " + strconv.Itoa(ID) +
 		"; counter reset!</h1></body></html>"
 
 	// Return response

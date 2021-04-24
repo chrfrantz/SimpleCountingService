@@ -25,7 +25,8 @@ func handlerRedirect(w http.ResponseWriter, r *http.Request) {
 
 	// Prepare HTML response
 	response := "<html><head><title>Simple Service</title></head>" +
-		"<body><h1>Please call service on path '/count'.</h1></body></html>"
+		"<body><h1>Please call service on path '/count'. " +
+		"To explore exit behaviour, use path '/kill' (error) and '/exit' (no error) </h1></body></html>"
 
 	// Return response
 	fmt.Fprintln(w, response)
@@ -65,6 +66,24 @@ func handlerReset(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, response)
 }
 
+/*
+Kills service with error - just to demonstrate restart policies
+ */
+func handlerExitFailure(w http.ResponseWriter, r *http.Request) {
+
+	// Exit service with error
+	os.Exit(1)
+}
+
+/*
+Kills service without error - just to demonstrate restart policies
+*/
+func handlerExitProper(w http.ResponseWriter, r *http.Request) {
+
+	// Exit service properly
+	os.Exit(0)
+}
+
 // Establish compatibility with PaaS platforms
 const ENV_VAR_PORT = "PORT"
 // Default port
@@ -81,6 +100,8 @@ func main() {
 	http.HandleFunc("/", handlerRedirect)
 	http.HandleFunc("/count", handlerIncrement)
 	http.HandleFunc("/reset", handlerReset)
+	http.HandleFunc("/kill", handlerExitFailure)
+	http.HandleFunc("/exit", handlerExitProper)
 	log.Println("Launching service on port " + port)
 	log.Fatal(http.ListenAndServe(":" + port, nil))
 }

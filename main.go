@@ -48,8 +48,8 @@ func handlerIncrement(w http.ResponseWriter, r *http.Request) {
 
 	// Prepare HTML response
 	response := "<html><head><title>Simple Counting Service</title></head>" +
-		"<body><h1>Call to service " + ID +
-		"; total calls: " + strconv.Itoa(count) + "</h1></body></html>"
+		"<body><h1>Call to service (ID: " + ID +
+		"); total calls: " + strconv.Itoa(count) + "</h1></body></html>"
 
 	// Return response
 	_, err := fmt.Fprintln(w, response)
@@ -68,8 +68,8 @@ func handlerReset(w http.ResponseWriter, r *http.Request) {
 
 	// Prepare HTML response
 	response := "<html><head><title>Simple Counting Service</title></head>" +
-		"<body><h1>Call to service " + ID +
-		"; counter reset!</h1></body></html>"
+		"<body><h1>Call to service (ID: " + ID +
+		"); counter reset!</h1></body></html>"
 
 	// Return response
 	_, err := fmt.Fprintln(w, response)
@@ -118,7 +118,7 @@ func main() {
 			log.Fatal("Error during unique ID generation. Error: ", err.Error())
 		}
 		// Generate final ID and remove suffix
-		ID = strconv.Itoa(int(h.Sum32()))[:8]
+		ID = strconv.Itoa(int(h.Sum32()))[:3]
 	}
 
 	http.HandleFunc("/", handlerRedirect)

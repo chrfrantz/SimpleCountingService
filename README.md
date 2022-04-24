@@ -16,5 +16,5 @@ This service comes with a Dockerfile for deployment. To build, call
 
 For deployment, call
 
-`docker run -d -p 8080:8080 --name runningService --restart always countingService`
+`docker run -d -p 8080:8080 --name runningService --restart=always countingService`
 

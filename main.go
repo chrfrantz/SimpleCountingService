@@ -13,9 +13,11 @@ import (
 /*
 The purpose of this service to simply increment a counter and display it to the caller, alongside a static id
 identifying the service instance.
+
+Source: https://github.com/chrfrantz/SimpleCountingService
 */
 
-// ID of the service - identifying the instance. If not manually set, it will be populated with unique hash.
+// ID of the service - identifying the instance. If not manually set, it will be populated with (reasonably) unique random numeric identifier.
 var ID = "0"
 
 // Counter to be modified at runtime

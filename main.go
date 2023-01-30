@@ -28,14 +28,14 @@ var color = "#FFFFFF"
 var count = 0
 
 // Key for http header to encode unique id for service (to simplify automated client-side analysis)
-const headerKey = "Counter-ID"
+const HeaderKey = "Counter-ID"
 
 /*
 Adds service ID of the instance to the http header (Key: #headerKey). The purpose is to facilitate efficient client-side
 identification of service ID for analytical purposes.
 */
 func addCounterID(w http.ResponseWriter) {
-	w.Header().Add(headerKey, ID)
+	w.Header().Add(HeaderKey, ID)
 }
 
 /*
@@ -167,6 +167,6 @@ func main() {
 	http.HandleFunc("/exit", handlerExitProper)
 
 	// Launch service
-	log.Println("Launching service on port " + port)
+	log.Println("Launching SimpleCountingService (with unique ID " + ID + ") on port " + port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }

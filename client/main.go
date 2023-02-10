@@ -16,7 +16,12 @@ Source: https://github.com/chrfrantz/SimpleCountingService
 /*
 SimpleCountingService Endpoint of interest for analysis
 */
-var URL = "http://localhost:8080/count"
+const URL = "http://localhost:8080/count"
+
+/*
+Number of invocations to be performed
+*/
+const Rounds = 50
 
 /*
 Http header key that holds unique id for service
@@ -38,19 +43,16 @@ func main() {
 	// Counter for performed runs
 	ct := 0
 
-	// Counter for total number of runs
-	round := 5
-
 	// Instantiate client
 	client := &http.Client{}
 	defer client.CloseIdleConnections()
 
-	fmt.Println("Running " + strconv.Itoa(round) + " invocations on service at " + URL)
+	fmt.Println("Running " + strconv.Itoa(Rounds) + " invocations on service at " + URL)
 
 	// Iterate through calls to specified endpoint
-	for i := 0; i < round; i++ {
+	for i := 0; i < Rounds; i++ {
 
-		fmt.Println("Running round " + strconv.Itoa(i))
+		fmt.Println("Performing Round " + strconv.Itoa(i))
 
 		// Perform request
 		resp, err := client.Get(URL)
@@ -72,7 +74,7 @@ func main() {
 
 	for k, v := range responseMap {
 		// Calculate percentage relative to rounds
-		percentage := fmt.Sprintf("%f", float64(v)/float64(round)*100)
+		percentage := fmt.Sprintf("%f", float64(v)/float64(Rounds)*100)
 		// Print accordingly
 		fmt.Println("Service " + k + ": " + percentage + " percent")
 	}

@@ -1,5 +1,5 @@
 # SimpleCountingService
-A simple service responding with request counts to explore invocation patterns, or test concurrent use of multiple service instances (e.g., to explore load balancing). To support the latter case, the service automatically creates a unique identifier (and background color for the HTML output) to distinguish instances at runtime.
+A simple service responding with request counts to explore invocation patterns, or test concurrent use of multiple service instances (e.g., to explore load balancing). To support the latter case, the service automatically creates a unique identifier (and background color for the HTML output) to distinguish instances at runtime. For diagnostic purposes the service optionally prints invocations to the console.
 
 By default, the service listens on port 8080.
 

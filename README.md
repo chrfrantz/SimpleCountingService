@@ -14,6 +14,8 @@ This service comes with a Dockerfile for deployment. To build, call
 
 `docker build -t countingservice .`
 
+* Note: if docker is not running with sudo privileges, prefix the command with `sudo`
+
 For deployment, call
 
 `docker run -d -p 8080:8080 --name runningService --restart=always countingservice`

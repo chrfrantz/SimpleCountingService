@@ -12,10 +12,10 @@ Endpoints include:
 
 This service comes with a Dockerfile for deployment. To build, call
 
-`docker build . -t countingService`
+`docker build -t countingservice .`
 
 For deployment, call
 
-`docker run -d -p 8080:8080 --name runningService --restart=always countingService`
+`docker run -d -p 8080:8080 --name runningService --restart=always countingservice`
 
 The repository further includes a complementary client that can be used to evaluate invocation patterns (e.g., errors, distribution across instances in the case of load balancing).

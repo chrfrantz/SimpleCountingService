@@ -117,9 +117,6 @@ func handlerRedirect(w http.ResponseWriter, r *http.Request) {
 		"</a>' (killing service; with error) and '<a href=\"" + PathExit + "\">" + PathExit +
 		"</a>' (proper service termination without error).")
 
-	// Sleep for one second
-	time.Sleep(1000)
-
 	// Return response
 	_, err := fmt.Fprintln(w, response)
 	if err != nil {
@@ -146,6 +143,9 @@ func handlerIncrement(w http.ResponseWriter, r *http.Request) {
 
 	// Prepare HTML response
 	response := generateHTMLOutput("Call to service (ID: " + ID + "); total calls: " + strconv.Itoa(count))
+
+	// Sleep for one second
+	time.Sleep(1 * time.Second)
 
 	// Return response
 	_, err := fmt.Fprintln(w, response)

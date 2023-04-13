@@ -5,7 +5,7 @@ By default, the service listens on port 8080.
 
 Endpoints include:
 
-* `:8080/count` to continue counting invocations
+* `:8080/count` to continue counting invocations. Note that handler will sleep to one second before returning (to simulate delay due to processing workload).
 * `:8080/reset` to reset the count
 * `:8080/exit` to stop the service without OS error (status code 0)
 * `:8080/kill` to stop the service with OS error (status code 1)

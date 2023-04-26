@@ -20,4 +20,6 @@ For deployment, call
 
 `docker run -d -p 8080:8080 --name runningService --restart=always countingservice`
 
+Alternatively, the service can be started using docker compose (`docker compose up -d`). Please see the parameterization in `compose.yml`.
+
 The repository further includes a complementary client that can be used to evaluate invocation patterns (e.g., errors, distribution across instances in the case of load balancing).

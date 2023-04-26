@@ -1,0 +1,10 @@
+services:
+  simplecounter:
+    privileged: false
+    build: .
+    restart: always
+    environment:
+      PORT: "8080"
+      DELAY: "1"
+    ports:
+      - '8080:8080'

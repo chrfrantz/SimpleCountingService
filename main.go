@@ -33,14 +33,20 @@ var count = 0
 // Key for http header to encode unique id for service (to simplify automated client-side analysis)
 const HeaderKey = "Counter-ID"
 
-// Establish compatibility with PaaS platforms
+// Environment variable for port
 const EnvVarPort = "PORT"
 
 // Default port
 const DefaultPort = "8080"
 
+// Environment variable to parameterize response delay upon instantiation
+const EnvVarDelay = "DELAY"
+
 // Switch to control printing to console (e.g., for performance reasons)
 const PrintToConsole = false
+
+// Response delay (in seconds) for /count handler (potentially overwritten from environment variable)
+var responseDelay = 1
 
 /*
 Service endpoint constants
@@ -144,8 +150,8 @@ func handlerIncrement(w http.ResponseWriter, r *http.Request) {
 	// Prepare HTML response
 	response := generateHTMLOutput("Call to service (ID: " + ID + "); total calls: " + strconv.Itoa(count))
 
-	// Sleep for one second
-	time.Sleep(1 * time.Second)
+	// Sleep for parameterized number of seconds
+	time.Sleep(time.Duration(responseDelay) * time.Second)
 
 	// Return response
 	_, err := fmt.Fprintln(w, response)
@@ -211,6 +217,16 @@ func main() {
 	port := os.Getenv(EnvVarPort)
 	if port == "" {
 		port = DefaultPort
+	}
+
+	// Check for custom response time
+	delay := os.Getenv(EnvVarDelay)
+	if delay != "" {
+		// Overwrite if not empty
+		envDelay, err := strconv.Atoi(delay)
+		if err != nil {
+			responseDelay = envDelay
+		}
 	}
 
 	// Set (reasonably) unique Identifier for UI output and background color by taking beginning of hashed timestamp

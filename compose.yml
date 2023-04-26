@@ -2,7 +2,7 @@ services:
   simplecounter:
     privileged: false
     build: .
-    restart: always
+    restart: unless-stopped
     environment:
       PORT: "8080"
       DELAY: "1"
